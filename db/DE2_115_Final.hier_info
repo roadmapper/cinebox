@@ -2,6 +2,8 @@
 VGA_CLK <= nios2:inst.vga_external_interface_CLK
 CLOCK_50 => nios2:inst.clk_clk
 OTG_INT[0] => nios2:inst.usb_external_interface_INT0
+PS2_CLK <> nios2:inst.ps2_external_interface_CLK
+PS2_DAT <> nios2:inst.ps2_external_interface_DAT
 SD_CMD <> nios2:inst.sd_card_interface_conduit_end_b_SD_cmd
 SD_DAT0 <> nios2:inst.sd_card_interface_conduit_end_b_SD_dat
 SD_DAT3 <> nios2:inst.sd_card_interface_conduit_end_b_SD_dat3

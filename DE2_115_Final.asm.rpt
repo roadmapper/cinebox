@@ -1,5 +1,5 @@
 Assembler report for DE2_115_Final
-Thu Dec 05 01:12:26 2013
+Fri Dec 06 15:40:28 2013
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
@@ -38,7 +38,7 @@ applicable agreement for further details.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Thu Dec 05 01:12:26 2013 ;
+; Assembler Status      ; Successful - Fri Dec 06 15:40:28 2013 ;
 ; Revision Name         ; DE2_115_Final                         ;
 ; Top-level Entity Name ; MSB                                   ;
 ; Family                ; Cyclone IV E                          ;
@@ -104,8 +104,8 @@ applicable agreement for further details.
 ; Option         ; Setting                                                          ;
 +----------------+------------------------------------------------------------------+
 ; Device         ; EP4CE115F29C7                                                    ;
-; JTAG usercode  ; 0x00A5D7AD                                                       ;
-; Checksum       ; 0x00A5D7AD                                                       ;
+; JTAG usercode  ; 0x00A5F24A                                                       ;
+; Checksum       ; 0x00A5F24A                                                       ;
 +----------------+------------------------------------------------------------------+
 
 
@@ -115,16 +115,16 @@ applicable agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Assembler
     Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
-    Info: Processing started: Thu Dec 05 01:12:18 2013
+    Info: Processing started: Fri Dec 06 15:40:20 2013
 Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off DE2_115_Final -c DE2_115_Final
 Info (115031): Writing out detailed assembly data for power analysis
 Info (115030): Assembler is generating device programming files
 Info (115017): Design contains a time-limited core -- only a single, time-limited programming file can be generated
 Warning (210042): Can't convert time-limited SOF into POF, HEX File, TTF, or RBF
 Info: Quartus II 64-Bit Assembler was successful. 0 errors, 1 warning
-    Info: Peak virtual memory: 511 megabytes
-    Info: Processing ended: Thu Dec 05 01:12:27 2013
-    Info: Elapsed time: 00:00:09
+    Info: Peak virtual memory: 493 megabytes
+    Info: Processing ended: Fri Dec 06 15:40:28 2013
+    Info: Elapsed time: 00:00:08
     Info: Total CPU time (on all processors): 00:00:08
 
 
