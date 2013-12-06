@@ -1,0 +1,31 @@
+<?xml version="1.0" ?>
+<LOG_ROOT>
+	<PROJECT NAME="DE2_115_Final">
+		<CBX_INST_ENTRY INSTANCE_NAME="|MSB|nios2:inst|nios2_char_buffer:char_buffer|altera_up_video_128_character_rom:Character_Rom|altsyncram:character_data_rom" CBX_FILE_NAME="altsyncram_0ai1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|MSB|nios2:inst|nios2_nios2:nios2|nios2_nios2_register_bank_a_module:nios2_nios2_register_bank_a|altsyncram:the_altsyncram" CBX_FILE_NAME="altsyncram_2jg1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|MSB|nios2:inst|Altera_UP_SD_Card_Avalon_Interface:sd_card_interface|Altera_UP_SD_Card_Interface:SD_Card_Port|Altera_UP_SD_Card_Buffer:data_line|Altera_UP_SD_Card_Memory_Block:packet_memory|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_pr92.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|MSB|nios2:inst|nios2_alpha_blender:alpha_blender|altera_up_video_alpha_blender_normal:alpha_blender|lpm_mult:b_times_alpha" CBX_FILE_NAME="mult_0dn.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|MSB|nios2:inst|nios2_alpha_blender:alpha_blender|altera_up_video_alpha_blender_normal:alpha_blender|lpm_mult:r_times_alpha" CBX_FILE_NAME="mult_0dn.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|MSB|nios2:inst|nios2_alpha_blender:alpha_blender|altera_up_video_alpha_blender_normal:alpha_blender|lpm_mult:g_times_one_minus_alpha" CBX_FILE_NAME="mult_0dn.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|MSB|nios2:inst|nios2_nios2:nios2|nios2_nios2_ic_data_module:nios2_nios2_ic_data|altsyncram:the_altsyncram" CBX_FILE_NAME="altsyncram_cjd1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|MSB|nios2:inst|nios2_nios2:nios2|nios2_nios2_register_bank_b_module:nios2_nios2_register_bank_b|altsyncram:the_altsyncram" CBX_FILE_NAME="altsyncram_3jg1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|MSB|nios2:inst|nios2_dual_clock_FIFO:dual_clock_fifo|dcfifo:Data_FIFO" CBX_FILE_NAME="dcfifo_nsj1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|MSB|nios2:inst|nios2_nios2:nios2|nios2_nios2_mult_cell:the_nios2_nios2_mult_cell|altera_mult_add:the_altmult_add_part_1|altera_mult_add_q1u2:auto_generated|altera_mult_add_rtl:altera_mult_add_rtl1|ama_multiplier_function:multiplier_block|lpm_mult:Mult0" CBX_FILE_NAME="mult_jp01.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|MSB|nios2:inst|nios2_pixel_buffer:pixel_buffer|scfifo:Image_Buffer" CBX_FILE_NAME="scfifo_l4a1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|MSB|nios2:inst|nios2_ps2:ps2|scfifo:Incoming_Data_FIFO" CBX_FILE_NAME="scfifo_f041.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|MSB|nios2:inst|nios2_jtag_uart:jtag_uart|nios2_jtag_uart_scfifo_w:the_nios2_jtag_uart_scfifo_w|scfifo:wfifo" CBX_FILE_NAME="scfifo_jr21.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|MSB|nios2:inst|nios2_nios2:nios2|lpm_add_sub:Add8" CBX_FILE_NAME="add_sub_qvi.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|MSB|nios2:inst|nios2_nios2:nios2|nios2_nios2_mult_cell:the_nios2_nios2_mult_cell|altera_mult_add:the_altmult_add_part_1" CBX_FILE_NAME="altera_mult_add_q1u2.v"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|MSB|nios2:inst|nios2_alpha_blender:alpha_blender|altera_up_video_alpha_blender_normal:alpha_blender|lpm_mult:b_times_one_minus_alpha" CBX_FILE_NAME="mult_0dn.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|MSB|nios2:inst|nios2_alpha_blender:alpha_blender|altera_up_video_alpha_blender_normal:alpha_blender|lpm_mult:r_times_one_minus_alpha" CBX_FILE_NAME="mult_0dn.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|MSB|nios2:inst|nios2_jtag_uart:jtag_uart|nios2_jtag_uart_scfifo_r:the_nios2_jtag_uart_scfifo_r|scfifo:rfifo" CBX_FILE_NAME="scfifo_jr21.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|MSB|nios2:inst|nios2_nios2:nios2|nios2_nios2_mult_cell:the_nios2_nios2_mult_cell|altera_mult_add:the_altmult_add_part_2" CBX_FILE_NAME="altera_mult_add_s1u2.v"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|MSB|nios2:inst|nios2_onchip_mem:onchip_mem|altsyncram:the_altsyncram" CBX_FILE_NAME="altsyncram_jdc1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|MSB|nios2:inst|nios2_alpha_blender:alpha_blender|altera_up_video_alpha_blender_normal:alpha_blender|lpm_mult:g_times_alpha" CBX_FILE_NAME="mult_0dn.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|MSB|nios2:inst|nios2_char_buffer:char_buffer|altsyncram:Char_Buffer_Memory" CBX_FILE_NAME="altsyncram_m672.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|MSB|nios2:inst|nios2_nios2:nios2|nios2_nios2_ic_tag_module:nios2_nios2_ic_tag|altsyncram:the_altsyncram" CBX_FILE_NAME="altsyncram_9tg1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|MSB|nios2:inst|nios2_nios2:nios2|nios2_nios2_mult_cell:the_nios2_nios2_mult_cell|altera_mult_add:the_altmult_add_part_2|altera_mult_add_s1u2:auto_generated|altera_mult_add_rtl:altera_mult_add_rtl1|ama_multiplier_function:multiplier_block|lpm_mult:Mult0" CBX_FILE_NAME="mult_j011.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|MSB|nios2:inst|nios2_nios2:nios2|nios2_nios2_nios2_oci:the_nios2_nios2_nios2_oci|nios2_nios2_nios2_ocimem:the_nios2_nios2_nios2_ocimem|nios2_nios2_ociram_sp_ram_module:nios2_nios2_ociram_sp_ram|altsyncram:the_altsyncram" CBX_FILE_NAME="altsyncram_jf71.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|MSB|nios2:inst|nios2_up_clocks_0:up_clocks_0|altpll:DE_Clock_Generator_System" CBX_FILE_NAME="altpll_6rb2.tdf"/>
+	</PROJECT>
+</LOG_ROOT>

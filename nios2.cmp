@@ -1,0 +1,37 @@
+	component nios2 is
+		port (
+			clk_clk                                  : in    std_logic                     := 'X';             -- clk
+			reset_reset_n                            : in    std_logic                     := 'X';             -- reset_n
+			vga_external_interface_CLK               : out   std_logic;                                        -- CLK
+			vga_external_interface_HS                : out   std_logic;                                        -- HS
+			vga_external_interface_VS                : out   std_logic;                                        -- VS
+			vga_external_interface_BLANK             : out   std_logic;                                        -- BLANK
+			vga_external_interface_SYNC              : out   std_logic;                                        -- SYNC
+			vga_external_interface_R                 : out   std_logic_vector(7 downto 0);                     -- R
+			vga_external_interface_G                 : out   std_logic_vector(7 downto 0);                     -- G
+			vga_external_interface_B                 : out   std_logic_vector(7 downto 0);                     -- B
+			led_green_external_interface_export      : out   std_logic_vector(8 downto 0);                     -- export
+			sram_external_interface_DQ               : inout std_logic_vector(15 downto 0) := (others => 'X'); -- DQ
+			sram_external_interface_ADDR             : out   std_logic_vector(19 downto 0);                    -- ADDR
+			sram_external_interface_LB_N             : out   std_logic;                                        -- LB_N
+			sram_external_interface_UB_N             : out   std_logic;                                        -- UB_N
+			sram_external_interface_CE_N             : out   std_logic;                                        -- CE_N
+			sram_external_interface_OE_N             : out   std_logic;                                        -- OE_N
+			sram_external_interface_WE_N             : out   std_logic;                                        -- WE_N
+			usb_external_interface_INT1              : in    std_logic                     := 'X';             -- INT1
+			usb_external_interface_DATA              : inout std_logic_vector(15 downto 0) := (others => 'X'); -- DATA
+			usb_external_interface_RST_N             : out   std_logic;                                        -- RST_N
+			usb_external_interface_ADDR              : out   std_logic_vector(1 downto 0);                     -- ADDR
+			usb_external_interface_CS_N              : out   std_logic;                                        -- CS_N
+			usb_external_interface_RD_N              : out   std_logic;                                        -- RD_N
+			usb_external_interface_WR_N              : out   std_logic;                                        -- WR_N
+			usb_external_interface_INT0              : in    std_logic                     := 'X';             -- INT0
+			ps2_external_interface_CLK               : inout std_logic                     := 'X';             -- CLK
+			ps2_external_interface_DAT               : inout std_logic                     := 'X';             -- DAT
+			sd_card_interface_conduit_end_b_SD_cmd   : inout std_logic                     := 'X';             -- b_SD_cmd
+			sd_card_interface_conduit_end_b_SD_dat   : inout std_logic                     := 'X';             -- b_SD_dat
+			sd_card_interface_conduit_end_b_SD_dat3  : inout std_logic                     := 'X';             -- b_SD_dat3
+			sd_card_interface_conduit_end_o_SD_clock : out   std_logic                                         -- o_SD_clock
+		);
+	end component nios2;
+
