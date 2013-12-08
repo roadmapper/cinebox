@@ -4,6 +4,7 @@
 #include <stdlib.h>  /* required for malloc */
 #include <string.h>
 
+
 //Variables
 char* filename = "fourcolor.bmp";
 FILE *fp;
@@ -46,13 +47,13 @@ typedef struct {
 
 
 
-int main() {
-	BMPtoCharArray();
+//int main() {
+//	BMPtoCharArray();
+//
+//	printToVGA();
+//}
 
-	printToVGA();
-}
-
-void printToVGA(){
+void printToVGA(alt_up_pixel_buffer_dma_dev * pixel_buf_dev){
 	int i, j;
 	int xoffset = 100;
 	int yoffset = 100;
@@ -76,7 +77,7 @@ void printToVGA(){
 
 		printf("Placing pixel of color %d at (%d,%d)\n", color, xpos, ypos);
 
-		//alt_up_pixel_buffer_dma_draw(pixel_buf_dev, color, xpos+xoffset, ypos+yoffset);
+		alt_up_pixel_buffer_dma_draw(pixel_buf_dev, color, xpos+xoffset, ypos+yoffset);
 	}
 
 }

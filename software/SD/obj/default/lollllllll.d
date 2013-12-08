@@ -12,7 +12,8 @@ obj/default/lollllllll.o: lollllllll.c ../SD_bsp/altera_up_ps2_keyboard.c \
   ../SD_bsp//HAL/inc/priv/alt_file.h ../SD_bsp//HAL/inc/os/alt_sem.h \
   ../SD_bsp//HAL/inc/priv/alt_no_error.h \
   ../SD_bsp//drivers/inc/altera_up_avalon_video_pixel_buffer_dma.h \
-  ../SD_bsp//drivers/inc/altera_up_avalon_video_character_buffer_with_dma.h
+  ../SD_bsp//drivers/inc/altera_up_avalon_video_character_buffer_with_dma.h \
+  keyboardMappings.c
 
 ../SD_bsp/altera_up_ps2_keyboard.c:
 
@@ -53,3 +54,5 @@ obj/default/lollllllll.o: lollllllll.c ../SD_bsp/altera_up_ps2_keyboard.c \
 ../SD_bsp//drivers/inc/altera_up_avalon_video_pixel_buffer_dma.h:
 
 ../SD_bsp//drivers/inc/altera_up_avalon_video_character_buffer_with_dma.h:
+
+keyboardMappings.c:

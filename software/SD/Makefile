@@ -142,7 +142,8 @@ ACDS_VERSION := 13.0sp1
 ELF := SD.elf
 
 # Paths to C, C++, and assembly source files.
-C_SRCS := lollllllll.c
+C_SRCS += lollllllll.c
+C_SRCS += keyboardMappings.c
 CXX_SRCS :=
 ASM_SRCS :=
 
