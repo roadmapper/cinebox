@@ -4,9 +4,9 @@
 #include <stdlib.h>  /* required for malloc */
 #include <string.h>
 
-
 //Variables
-char* filename = "fourcolor.bmp";
+char* filename;// = "eightcolor.bmp";
+int commentsOn = 0;
 FILE *fp;
 unsigned char * bitmapImage;
 unsigned char * pixelData;
@@ -44,27 +44,29 @@ typedef struct {
 } COLORINDEX;
 #pragma pack(pop)
 
+void printToVGA();
+int BMPReadImage(FILE* fptr);
+int BMPtoCharArray();
 
 
 
-//int main() {
-//	BMPtoCharArray();
-//
-//	printToVGA();
-//}
 
-void printToVGA(alt_up_pixel_buffer_dma_dev * pixel_buf_dev){
+
+unsigned char* formattedPix;
+
+void printToVGA(){
 	int i, j;
 	int xoffset = 100;
 	int yoffset = 100;
 	float scalefactor = 1023/255;
+
+	formattedPix =  (unsigned char*)malloc((2+num_pix*5)*sizeof(int));
 
 	for(i = 0; i < (num_pix*3); i += 3){
 
 		int R = (int)(pixelData[i]*scalefactor);
 		int G = (int)(pixelData[i+1]*scalefactor);
 		int B = (int)(pixelData[i+2]*scalefactor);
-		//printf("R %d G %d B %d\n", R, G, B);
 
 		int rbits = R << 20;
 		int gbits = G << 10;
@@ -75,9 +77,34 @@ void printToVGA(alt_up_pixel_buffer_dma_dev * pixel_buf_dev){
 		int xpos = (i/3) % width;
 		int ypos = (int) (i/3) / height;
 
-		printf("Placing pixel of color %d at (%d,%d)\n", color, xpos, ypos);
+		//printf("Placing pixel of color %d at (%d,%d)\n", color, xpos, ypos);
 
-		alt_up_pixel_buffer_dma_draw(pixel_buf_dev, color, xpos+xoffset, ypos+yoffset);
+		//alt_up_pixel_buffer_dma_draw(pixel_buf_dev, color, xpos+xoffset, ypos+yoffset);
+	}
+
+	//Build the output array
+	int iter = 0;
+	int tag = 0;
+	height = abs(height);
+	width = abs(width);
+	printf("%d,%d,", width,height);
+	for(i=0; i< height; i++){
+		printf("{");
+		for(j=0; j< (width*3); j+=3){
+			printf("%d,%d,%d",pixelData[(width*i*3)+j], pixelData[(width*i*3)+j+1], pixelData[(width*i*3)+j+2]);
+			if(pixelData[(width*i*3)+j] == 0 && pixelData[(width*i*3)+j+1] == 0 && pixelData[(width*i*3)+j+2] == 0)
+				tag++;
+			if((j+3)<(width*3)) printf(",");
+			iter++;
+		}
+		printf("}");
+		if((i+1)<height) printf(",");
+	}
+	printf("\n");
+
+	if(commentsOn){
+		printf("Pix count now is %d\n", iter);
+		printf("Tags are %d\n", tag);
 	}
 
 }
@@ -87,7 +114,11 @@ int BMPtoCharArray() {
 	if(!fp){return 0;}
 
 	int s = BMPReadImage(fp);
-	if(s == 1) printf("Image was read successfully\n");
+
+	if(commentsOn){
+		if(s == 1) printf("Image was read successfully\n");
+		else printf("Image read failed!");
+	}
 
 	return 1;
 }
@@ -98,7 +129,6 @@ int BMPReadImage(FILE* fptr) {
 	unsigned char *bitmapImage;  //store image data
 	int x, y, rd;
 	int lineLength;
-	//char *stderr = "VGAerr";
 
 
 	/* Read and check BMP header */
@@ -112,10 +142,14 @@ int BMPReadImage(FILE* fptr) {
 	}
 	do{
 		if((rd = fread(&header.size, 4, 1, fptr)) != 1) break;
-		printf("File size: %d bytes\n", header.size);
+		if(commentsOn){
+			printf("File size: %d bytes\n", header.size);
+		}
 		if((rd = fread(&header.reserved, 4, 1, fptr)) != 1) break;
 		if((rd = fread(&header.offset, 4, 1, fptr)) != 1) break;
-		printf("Offset to image data is %d bytes\n", header.offset);
+		if(commentsOn){
+			printf("Offset to image data is %d bytes\n", header.offset);
+		}
 	}while(0);
 	if(rd != 1){
 		fprintf(stderr, "Error reading file\n");
@@ -129,12 +163,14 @@ int BMPReadImage(FILE* fptr) {
 	}
 	width = infoheader.width;
 	height = infoheader.height;
-	printf("Image size = %d x %d\n", infoheader.width, infoheader.height);
-	printf("Number of color planes is %d\n", infoheader.planes);
-	printf("Bits per pixel is %d\n", infoheader.bits);
-	printf("Compression type is %d\n", infoheader.compression);
-	//printf("Number of colors is %d\n", infoheader.ncolours);
-	//printf("Number of required colors is %d\n", infoheader.importantcolours);
+	if(commentsOn){
+		printf("Image size = %d x %d\n", infoheader.width, infoheader.height);
+		printf("Number of color planes is %d\n", infoheader.planes);
+		printf("Bits per pixel is %d\n", infoheader.bits);
+		printf("Compression type is %d\n", infoheader.compression);
+		//printf("Number of colors is %d\n", infoheader.ncolours);
+		//printf("Number of required colors is %d\n", infoheader.importantcolours);
+	}
 
 	//move file point to the beginning of bitmap data
 	fseek(fptr, header.offset, SEEK_SET);
@@ -153,8 +189,12 @@ int BMPReadImage(FILE* fptr) {
 
 	//read in the bitmap image data
 	size_t byte_size = 8;//sizeof(Byte);
+
 	size_t num_bytes = header.size-header.offset;
-	num_pix = infoheader.width * infoheader.height;
+	num_pix = abs(infoheader.width * infoheader.height);
+	if(commentsOn){
+		printf("Num pixels: %d\n", num_pix);
+	}
 	fread(bitmapImage, byte_size, num_bytes, fptr);
 
 	//make sure bitmap image data was read
@@ -165,48 +205,103 @@ int BMPReadImage(FILE* fptr) {
 	}
 
 	int imageIdx;
-	/*printf("\nBitmapImage data:\n");
-	for (imageIdx = 0; imageIdx < num_bytes; imageIdx++)
-	{
-		//printf("%d,%d,%d,%d\n",bitmapImage[imageIdx],bitmapImage[imageIdx+1],bitmapImage[imageIdx+2],bitmapImage[imageIdx+3]);
-		printf("%d,",bitmapImage[imageIdx]);
-	}*/
+	if(commentsOn){
+		printf("\nBitmapImage data:\n");
+		for (imageIdx = 0; imageIdx < num_bytes; imageIdx++)
+		{
+			printf("%d,",bitmapImage[imageIdx]);
+		}
+	}
 
 
 
 	//Assign relevant image data to the global pixelData structure
 	//swap the r and b values to get RGB (bitmap is BGR)
 	//ignore the 8-mult padding
-	//change from bottom-up to top-down???
-	printf("\n\nPixelData data:\n");
-	int endOfData = num_pix*4; //ignore 2-byte end, start at last row
+	//change from bottom-up to top-down
+	if(commentsOn){
+		printf("\n\nPixelData data:\n");
+	}
 	int pixIdx = 0;
-	for (imageIdx = endOfData-8; imageIdx >= 0; imageIdx -= 8) //BRG BRG padding padding
-	{
-		pixelData[pixIdx+0] = bitmapImage[imageIdx+2];
-		pixelData[pixIdx+1] = bitmapImage[imageIdx+1];
-		pixelData[pixIdx+2] = bitmapImage[imageIdx+0];
+	int pix = 0;
 
-		pixelData[pixIdx+3] = bitmapImage[imageIdx+5];
-		pixelData[pixIdx+4] = bitmapImage[imageIdx+4];
-		pixelData[pixIdx+5] = bitmapImage[imageIdx+3];
+	int rowlength = 3*width;
 
-		printf("%d\t%d\t%d\n",pixelData[pixIdx],pixelData[pixIdx+1],pixelData[pixIdx+2]);
-		printf("%d\t%d\t%d\n",pixelData[pixIdx+3],pixelData[pixIdx+4],pixelData[pixIdx+5]);
+	//if there is padding
+	if(rowlength%4 != 0){
+		if(commentsOn){
+			printf("Padding is present\n");
+		}
+		int padding = rowlength%4;
+		rowlength += padding;
+		int endOfData = height*rowlength; //ignore 2-byte end, start at last row
 
-		pixIdx+=6;
+		for (imageIdx = endOfData-rowlength; imageIdx >= 0; imageIdx -= rowlength) //BRG BRG padding padding
+		{
+			int pixStart;
+			for(pixStart = imageIdx; pixStart < (imageIdx+width*3); pixStart+=3){
+				pixelData[pixIdx+0] = bitmapImage[pixStart+2];
+				pixelData[pixIdx+1] = bitmapImage[pixStart+1];
+				pixelData[pixIdx+2] = bitmapImage[pixStart+0];
+
+				pixIdx+=3;
+				pix++;
+
+			}
+		}
+	}
+	else {//if there is not padding
+		if(commentsOn){
+			printf("No padding present\n");
+		}
+		int endOfData = height*rowlength;
+		//int rowlength = 3*width;
+
+		pixIdx = 0;
+		for (imageIdx = endOfData-rowlength; imageIdx >= 0; imageIdx -= rowlength) //BRG BRG
+		{
+			//printf("ROW%d,",imageIdx);
+			int pixStart;
+			for(pixStart = imageIdx; pixStart < (imageIdx+width*3); pixStart+=3){
+				pixelData[pixIdx+0] = bitmapImage[pixStart+2];
+				pixelData[pixIdx+1] = bitmapImage[pixStart+1];
+				pixelData[pixIdx+2] = bitmapImage[pixStart+0];
+
+				pixIdx+=3;
+				pix++;
+
+			}
+		}
 	}
 
+	if(commentsOn){
+		printf("Pixels loaded: %d\n", pix);
 
-	/*int i;
-	for(i = 0; i < (num_pix*3); i++){
-		printf("%d,", pixelData[i]);
-	}*/
-	printf("\n");
+
+		//Print pixel data
+		int i;
+		for(i = 0; i < (num_pix*3); i++){
+			printf("%d,", pixelData[i]);
+		}
+		printf("\n");
+	}
 
 	//close file and return
 	fclose(fptr);
-	//return bitmapImage;
 	return 1;
 
 }
+
+
+int main(int argc, char **argv) {
+	filename = argv[1];
+	printf("%s",filename);
+
+	BMPtoCharArray();
+
+	printToVGA();
+	//return 1;
+}
+
+
+
