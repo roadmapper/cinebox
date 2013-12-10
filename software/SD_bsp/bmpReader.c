@@ -5,7 +5,7 @@
 #include <string.h>
 
 //Variables
-char* filename;// = "eightcolor.bmp";
+char* filename;
 int commentsOn = 0;
 FILE *fp;
 unsigned char * bitmapImage;
@@ -78,9 +78,12 @@ void printToVGA(){
 
 		int xpos = (i/3) % width;
 		int ypos = (i/3-xpos)/width;
-		//float ypos = floorf((float)(i/3.0) / (float)height);
 
-		//printf("Placing pixel of color %d at (%d,%d)\n", color, xpos, ypos);
+		if(commentsOn){
+			printf("\nPlacing pixel of color %d at (%d,%d).\n", color, xpos, ypos);
+			printf("Passed: ");
+		}
+
 		//Print out the unsigned int COLOR for each pixel
 		if(xpos == 0) printf("{");
 		printf("%u", color);
