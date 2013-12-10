@@ -59,9 +59,11 @@ void printToVGA(){
 	int xoffset = 100;
 	int yoffset = 100;
 	float scalefactor = 1023/255;
+	int iter = 0;
 
 	formattedPix =  (unsigned char*)malloc((2+num_pix*5)*sizeof(int));
 
+	printf("{");
 	for(i = 0; i < (num_pix*3); i += 3){
 
 		int R = (int)(pixelData[i]*scalefactor);
@@ -75,15 +77,30 @@ void printToVGA(){
 		int color = rbits | gbits | bbits;
 
 		int xpos = (i/3) % width;
-		int ypos = (int) (i/3) / height;
+		int ypos = (i/3-xpos)/width;
+		//float ypos = floorf((float)(i/3.0) / (float)height);
 
 		//printf("Placing pixel of color %d at (%d,%d)\n", color, xpos, ypos);
+		//Print out the unsigned int COLOR for each pixel
+		if(xpos == 0) printf("{");
+		printf("%u", color);
+		if(xpos == width-1) {
+			printf("}");
+			if(ypos != (height-1)) printf(",");
+		}
+		else printf(",");
+		iter++;
+
 
 		//alt_up_pixel_buffer_dma_draw(pixel_buf_dev, color, xpos+xoffset, ypos+yoffset);
 	}
+	printf("}\n");
+	if(commentsOn){
+		printf("Pix count now is %d\n", iter);
+	}
 
 	//Build the output array
-	int iter = 0;
+	/*int iter = 0;
 	int tag = 0;
 	height = abs(height);
 	width = abs(width);
@@ -105,7 +122,7 @@ void printToVGA(){
 	if(commentsOn){
 		printf("Pix count now is %d\n", iter);
 		printf("Tags are %d\n", tag);
-	}
+	}*/
 
 }
 
@@ -161,8 +178,9 @@ int BMPReadImage(FILE* fptr) {
 		fprintf(stderr,"Failed to read BMP info header\n");
 		return 0;
 	}
-	width = infoheader.width;
-	height = infoheader.height;
+	width = abs(infoheader.width);
+	height = abs(infoheader.height);
+
 	if(commentsOn){
 		printf("Image size = %d x %d\n", infoheader.width, infoheader.height);
 		printf("Number of color planes is %d\n", infoheader.planes);
@@ -295,7 +313,6 @@ int BMPReadImage(FILE* fptr) {
 
 int main(int argc, char **argv) {
 	filename = argv[1];
-	printf("%s",filename);
 
 	BMPtoCharArray();
 
